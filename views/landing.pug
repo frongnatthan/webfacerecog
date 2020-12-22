@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Face recognition
+  p Upload Image
   form(action="/",method="POST")
-    input(name="lead_email", type="email")
-    button(type="submit") Submit
+    input(name="lead_email", type="File")
+    button(type="submit") Upload
