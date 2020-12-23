@@ -63,3 +63,11 @@ exports.delete_lead = function(req, res, next) {
     res.redirect('/leads');
   })
 }
+
+exports.show_upload = function(req, res, next) {
+  res.render('index', { title: 'Express' });
+}
+
+exports.do_upload = function(req, res) {
+  res.send("File upload sucessfully.");
+  }
