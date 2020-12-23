@@ -30,8 +30,6 @@ router.post('/lead/:lead_id/delete', hasAuth, landing.delete_lead);
 
 
 
-
-
 //multer object creation
 var multer  = require('multer')
 var storage = multer.diskStorage({

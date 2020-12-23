@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   include ../common/head.pug
-  +head("Sign up to Starter MVP")
+  +head("Sign up to Face Recognition System")
   body
     header
       include ../common/navbar.pug
@@ -20,7 +20,10 @@ html(lang='en')
                       if (errors && errors.email)
                         p.small.text-danger #{errors.email}
                       label.small.mb-1.mt-3 Password:
-                      input(placeholder='New Password',required=true, name='password', type='password', value='').form-control
+                      input(placeholder='Password',required=true, name='password', type='password', value='').form-control
+                      label.small.mb-1.mt-3 Confirm Password:
+
+                      input(placeholder='Confirm Password',required=true, name='cpassword', type='password', value='').form-control
                       if (errors && errors.password)
                         p.small.text-danger #{errors.password}
                       button.mt-3.btn.btn-primary(type='submit') Sign up
