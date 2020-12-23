@@ -65,9 +65,10 @@ exports.delete_lead = function(req, res, next) {
 }
 
 exports.show_upload = function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('upload', { title: 'Express' });
 }
 
-exports.do_upload = function(req, res) {
+exports.do_upload = function(req, res,next) {
+  console.log("File name: ",req.body.imageupload);
   res.send("File upload sucessfully.");
   }
