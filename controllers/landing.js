@@ -1,9 +1,6 @@
 const models = require('../models')
 
 
-exports.get_landing = function(req, res, next) {
-  res.render('landing', { title: 'Express', user: req.user });
-}
 
 exports.submit_lead = function(req, res, next) {
 
@@ -64,9 +61,18 @@ exports.delete_lead = function(req, res, next) {
 
 
 
+exports.get_home = function(req, res, next) {
+  res.render('home_user/home', { title: 'Express', user: req.user });
+}
+exports.get_layout = function(req, res, next) {
+  res.render('home_user/layout', { title: 'Express', user: req.user });
+}
+
+
+
 //upload to webserver
 exports.show_upload = function(req, res, next) {
-  res.render('upload', { title: 'Express' });
+  res.render('home_user/upload', { title: 'Express' });
 }
 
 exports.do_upload = function(req, res, file) {

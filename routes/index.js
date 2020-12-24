@@ -15,11 +15,7 @@ router.get('/logout', user.logout);
 
 
 
-
-
 /* GET home page. */
-router.get('/', landing.get_landing);
-router.post('/', landing.submit_lead);
 router.get('/leads', hasAuth, landing.show_leads);
 router.get('/lead/:lead_id', hasAuth, landing.show_lead);
 router.get('/lead/:lead_id/edit', hasAuth, landing.show_edit_lead);
@@ -28,6 +24,10 @@ router.post('/lead/:lead_id/delete', hasAuth, landing.delete_lead);
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//home_user
+router.get('/',landing.get_home);
+router.post('/', hasAuth,landing.submit_lead);
 
 
 //multer object creation
@@ -43,12 +43,13 @@ var storage = multer.diskStorage({
         cb(null, file.originalname)
   }
 })
- 
+
 var upload = multer({ storage: storage })
-
-
-router.get('/upload',landing.show_upload);
+router.get('/upload',hasAuth,landing.show_upload);
  
-router.post('/upload', upload.single('imageupload'),landing.do_upload);
+router.post('/upload', hasAuth,upload.single('imageupload'),landing.do_upload);
+
+
+
 
 module.exports = router;

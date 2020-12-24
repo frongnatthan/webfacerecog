@@ -13,6 +13,10 @@ const validateCreateUserFields = function(errors, req) {
 	if (!validator.isLength(req.body.password, {min: 8, max: 25})) {
 		errors["password"] = "Please ensure that your password has a minimum of 8 characters";
 	}
+	if (req.body.password!=req.body.cpassword){
+		errors["password"] = "Please is not match";
+	
+	}
 }
 
 exports.validateUser = function(errors, req) {

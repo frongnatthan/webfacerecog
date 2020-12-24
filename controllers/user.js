@@ -36,13 +36,16 @@ exports.signup = function(req, res, next) {
 				if (user !== null) {
 					newUser = models.User.build({
 						email: req.body.email,
-						password: generateHash(req.body.password)
+						password: generateHash(req.body.password),
+						firstname: req.body.name,
+						lastname: req.body.lname
 					});					
 				} else {
 					newUser = models.User.build({
 						email: req.body.email,
 						password: generateHash(req.body.password),
-						is_admin: true
+						is_admin: true,
+						
 					});
 				}
 				return newUser.save().then(result => {
