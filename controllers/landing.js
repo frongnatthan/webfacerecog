@@ -1,5 +1,6 @@
 const models = require('../models')
 
+var http = require('http');
 
 
 exports.submit_lead = function(req, res, next) {
@@ -76,6 +77,25 @@ exports.show_upload = function(req, res, next) {
 }
 
 exports.do_upload = function(req, res, file) {
+  var api_response = '';
+  var options ={
+    host: '127.0.0.1',
+    port: 5000,
+    path: '/action',
+    method:'GET'
+  }
 
-  res.send("File upload sucessfully.");
+  callback = function(response){
+    response.on("data",function(chunk){
+      api_response+=chunk;
+
+    });
+    response.on("end",function(){
+      console.log("api response is: "+ api_response);
+    });
+  }
+  var req = http.request(options, callback);
+  req.end();
+
+  res.send("File upload and Train sucessfully.");
   }

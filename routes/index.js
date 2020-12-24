@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 let landing=require('../controllers/landing');
 let user = require('../controllers/user');
 
