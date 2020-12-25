@@ -35,7 +35,7 @@ var storage = multer.diskStorage({
     destination: function (req, file, cb) {
     	  	  console.log(file.originalname)
 
-        cb(null, 'picture')
+        cb(null, 'VideoForPic')
     },
     filename: function (req, file, cb) {
 
