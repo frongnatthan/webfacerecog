@@ -80,7 +80,7 @@ exports.do_upload = function(req, res, file) {
   var api_response = '';
   var options ={
     host: '127.0.0.1',
-    port: 5000,
+    port: 9999,
     path: '/action',
     method:'GET'
   }

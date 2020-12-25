@@ -60,7 +60,7 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
     # Save the trained KNN classifier
     if model_save_path is not None:
         #model_save_path = class_dir+".clf"
-        model_save_path = "BossAndBossFar.clf"
+        model_save_path = "trained_knn_model.clf"
         with open(model_save_path, 'wb') as f:
             pickle.dump(knn_clf, f)
 
@@ -110,17 +110,20 @@ def process():
     print("Cropping complete!")
     print("Training KNN classifier...")
 
-        
+process_stat=False        
+train_stat=False
 
 app=Flask(__name__)
 api=Api(app)
 class Action(Resource):
     def get(self):
-        process()
-        train("PicForTrain", model_save_path="trained_knn_model.clf", n_neighbors=2)
+        process_stat=process()
+        train_stat=train("PicForTrain", model_save_path="trained_knn_model.clf", n_neighbors=2)
+        if(process_stat and train_stat):
+            return 0
    
 api.add_resource(Action,"/action")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=9999,debug=True)
     

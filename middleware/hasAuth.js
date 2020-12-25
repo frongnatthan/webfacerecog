@@ -8,7 +8,7 @@ exports.isLoggedIn = function(req, res, next) {
 }
 
 exports.hasAuth = function(req, res, next) {
-	if (req.user && req.user.is_admin == true)
+	if (req.user || req.user.is_admin == true)
 		next();
 	else
 		next(createError(404, "Please Login Before Upload."));
