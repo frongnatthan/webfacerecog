@@ -18,13 +18,15 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'JPG'}
 def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree', verbose=False):
     X = []
     y = []
-    i = 0
-    j = 1
+    i = 1
+    
     # Loop through each person in the training set
     for class_dir in os.listdir(train_dir):
         print(type(class_dir))
         if not os.path.isdir(os.path.join(train_dir, class_dir)):
             continue
+        n=len(os.listdir(os.path.join(train_dir, class_dir)))
+
 
         # Loop through each training image for the current person
         for img_path in image_files_in_folder(os.path.join(train_dir, class_dir)):
@@ -40,10 +42,10 @@ def train(train_dir, model_save_path=None, n_neighbors=None, knn_algo='ball_tree
                 # Add face encoding for current image to the training set
                 X.append(face_recognition.face_encodings(image, known_face_locations=face_bounding_boxes)[0])
                 y.append(class_dir)
-            print("Img : "+str(i))
+            print("Img : "+str(i)+" from "+str(n))
             i += 1
-        print("folder : "+str(j))
-        j += 1
+        i=1
+        print("folder : "+str(class_dir)+" finished")
         
     # Determine how many neighbors to use for weighting in the KNN classifier
     if n_neighbors is None:
