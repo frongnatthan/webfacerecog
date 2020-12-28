@@ -27,6 +27,7 @@ router.post('/lead/:lead_id/delete', hasAuth, landing.delete_lead);
 //home_user
 router.get('/',landing.get_home);
 router.post('/', hasAuth,landing.submit_lead);
+router.get('/cctv',hasAuth,landing.show_cctv);
 
 
 //multer object creation
@@ -44,7 +45,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage })
-router.get('/upload',hasAuth,landing.show_upload);
+router.get('/upload',landing.show_upload);
  
 router.post('/upload', hasAuth,upload.single('imageupload'),landing.do_upload);
 

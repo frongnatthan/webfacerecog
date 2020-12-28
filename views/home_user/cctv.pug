@@ -1,0 +1,11 @@
+block content
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  meta(http-equiv="X-UA-Compatible",content="ie=edge")
+  div
+    canvas(id="chanel1",width="1280",height="720")
+    script(type="text/javascript" src='/javascripts/jsmpeg.min.js')
+    script(type="text/javascript").
+      var canvas = document.getElementById('chanel1');
+      var websocket = new WebSocket("ws://127.0.0.1:8888");
+      var player= new jsmpeg(websocket, {canvas:canvas, autoplay:true, loop:true});

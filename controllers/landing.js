@@ -3,6 +3,12 @@ const models = require('../models')
 var http = require('http');
 
 
+
+
+
+
+
+
 exports.submit_lead = function(req, res, next) {
 
   return models.Lead.create({
@@ -73,11 +79,18 @@ exports.get_layout = function(req, res, next) {
 
 //upload to webserver
 exports.show_upload = function(req, res, next) {
-  res.render('home_user/upload', { title: 'Express' });
+
+
+
+
+
+res.render('home_user/upload', { title: 'Express' ,stream: 'stream'});
+ 
+
 }
 
 exports.do_upload = function(req, res, file) {
-  var api_response = '';
+  var api_response = 'sucessfully';
   var options ={
     host: '127.0.0.1',
     port: 9999,
@@ -99,3 +112,20 @@ exports.do_upload = function(req, res, file) {
 
   res.send("File upload and Train sucessfully.");
   }
+
+
+
+
+
+
+exports.show_cctv = function(req, res, next) {
+
+res.render('home_user/cctv');
+ 
+
+}
+
+
+
+
+
