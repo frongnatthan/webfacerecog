@@ -16,18 +16,7 @@ var io = require("socket.io")(http);
 
 
 
-    //Camera Authentication
-    var ip_address = "158.108.122.7"
-    //camera username and password
-    var username = "admin";
-    var password="kusrc12345";
-
-    //A channel of camera stream
-    Stream = require('node-rtsp-stream');
-    stream = new Stream({
-        streamUrl: 'rtsp://' + username + ':' + password + '@' + ip_address +':554/stream',
-        wsPort: 8888    
-    });
+   
 
 
 // view engine setup
@@ -62,5 +51,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;

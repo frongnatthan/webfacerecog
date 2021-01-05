@@ -1,13 +1,7 @@
 const models = require('../models')
 
+
 var http = require('http');
-
-
-
-
-
-
-
 
 exports.submit_lead = function(req, res, next) {
 
@@ -68,6 +62,20 @@ exports.delete_lead = function(req, res, next) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 exports.get_home = function(req, res, next) {
   res.render('home_user/home', { title: 'Express', user: req.user });
 }
@@ -79,13 +87,7 @@ exports.get_layout = function(req, res, next) {
 
 //upload to webserver
 exports.show_upload = function(req, res, next) {
-
-
-
-
-
-res.render('home_user/upload', { title: 'Express' ,stream: 'stream'});
- 
+res.render('home_user/upload'); 
 
 }
 
@@ -119,8 +121,120 @@ exports.do_upload = function(req, res, file) {
 
 
 exports.show_cctv = function(req, res, next) {
-
 res.render('home_user/cctv');
+
+}
+
+
+
+
+exports.record_cctv1 = function(req, res, next) {
+
+const Recorder = require('node-rtsp-recorder').Recorder
+ 
+    var rec = new Recorder({
+        url: 'rtsp://admin:kusrc12345@158.108.122.5:554/stream',
+        timeLimit: 60, // time in seconds for each segmented video file
+        folder: '/home/natthan/Desktop/myapp/VideoForPic',
+    })
+    // Starts Recording
+    rec.startRecording();
+ 
+    setTimeout(() => {
+        console.log('Stopping Recording')
+        rec.stopRecording()
+        rec = null
+        res.render('home_user/cctv');
+    }, 30000)
+    res.redirect('/cctv');
+
+}
+
+
+exports.record_cctv2 = function(req, res, next) {
+
+const Recorder = require('node-rtsp-recorder').Recorder
+ 
+    var rec = new Recorder({
+        url: 'rtsp://admin:kusrc12345@158.108.122.6:554/stream',
+        timeLimit: 60, // time in seconds for each segmented video file
+        folder: '/home/natthan/Desktop/myapp/VideoForPic',
+        name: false,
+        directoryPathFormat: false,
+    })
+    // Starts Recording
+    rec.startRecording();
+ 
+    setTimeout(() => {
+        console.log('Stopping Recording')
+        rec.stopRecording()
+        rec = null
+        res.render('home_user/cctv');
+
+    }, 30000)
+    res.redirect('/cctv');
+
+
+
+
+
+}
+
+exports.record_cctv3 = function(req, res, next) {
+
+const Recorder = require('node-rtsp-recorder').Recorder
+ 
+    var rec = new Recorder({
+        url: 'rtsp://admin:kusrc12345@158.108.122.7:554/stream',
+        timeLimit: 60, // time in seconds for each segmented video file
+        folder: '/home/natthan/Desktop/myapp/VideoForPic',
+    })
+    // Starts Recording
+    rec.startRecording();
+ 
+    setTimeout(() => {
+        console.log('Stopping Recording')
+        rec.stopRecording()
+        rec = null
+    }, 30000)
+    res.redirect('/cctv');
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/////////open cv test////////
+const cv = require('opencv4nodejs');
+const path = require('path');
+const express = require('express');
+const app = express();
+const server =require('http').Server(app);
+const io= require('socket.io')(server);
+
+//'rtsp://admin:kusrc12345@158.108.122.5:554/stream'//
+const wCap = new cv.VideoCapture(0);
+///////////////
+
+
+exports.show_opencv = function(req, res, next) {
+  setInterval(() => {
+    const frame = wCap.read();
+    const image = cv.imencode('.jpg', frame).toString('base64');
+    io.emit('image',image);
+  },1000)
+//res.sendFile(path.join(__dirname,'home/opencv'));
+res.render('home_user/opencv');
  
 
 }

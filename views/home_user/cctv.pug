@@ -2,10 +2,28 @@ block content
   meta(charset="UTF-8")
   meta(name="viewport" content="width=device-width, initial-scale=1.0")
   meta(http-equiv="X-UA-Compatible",content="ie=edge")
-  div
-    canvas(id="chanel1",width="1280",height="720")
+  div(align="center")
+    canvas(id="chanel1")
+    form(action="/record_cctv1", method="POST")
+                      button(type="submit").btn.btn-primary CCTV1
+    canvas(id="chanel2")
+    form(action="/record_cctv2", method="POST")
+                      button(type="submit").btn.btn-primary CCTV2
+    canvas(id="chanel3")
+    form(action="/record_cctv3", method="POST")
+                      button(type="submit").btn.btn-primary CCTV3
+    
     script(type="text/javascript" src='/javascripts/jsmpeg.min.js')
     script(type="text/javascript").
-      var canvas = document.getElementById('chanel1');
-      var websocket = new WebSocket("ws://127.0.0.1:8888");
-      var player= new jsmpeg(websocket, {canvas:canvas, autoplay:true, loop:true});
+      var canvas1 = document.getElementById('chanel1');
+      var canvas2 = document.getElementById('chanel2');
+      var canvas3 = document.getElementById('chanel3');
+      
+      var websocket1 = new WebSocket("ws://127.0.0.1:8887");
+      var websocket2 = new WebSocket("ws://127.0.0.1:8888");
+      var websocket3 = new WebSocket("ws://127.0.0.1:8889");
+
+      var cam1= new jsmpeg(websocket1, {canvas:canvas1, autoplay:true, loop:true});
+      var cam2= new jsmpeg(websocket2, {canvas:canvas2, autoplay:true, loop:true});
+      var cam3= new jsmpeg(websocket3, {canvas:canvas3, autoplay:true, loop:true});
+
