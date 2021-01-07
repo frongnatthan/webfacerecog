@@ -28,7 +28,6 @@ router.post('/lead/:lead_id/delete', landing.delete_lead);
 router.get('/',landing.get_home);
 router.post('/',landing.submit_lead);
 router.get('/cctv',landing.show_cctv);
-router.post('/record_cctv1',landing.record_cctv1);
 router.post('/record_cctv2',landing.record_cctv2);
 router.post('/record_cctv3',landing.record_cctv3);
 
@@ -52,7 +51,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 router.get('/upload',landing.show_upload);
  
-router.post('/upload', hasAuth,upload.single('imageupload'),landing.do_upload);
+router.post('/upload',upload.single('imageupload'),landing.do_upload);
 
 
 

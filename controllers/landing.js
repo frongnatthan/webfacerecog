@@ -128,27 +128,7 @@ res.render('home_user/cctv');
 
 
 
-exports.record_cctv1 = function(req, res, next) {
 
-const Recorder = require('node-rtsp-recorder').Recorder
- 
-    var rec = new Recorder({
-        url: 'rtsp://admin:kusrc12345@158.108.122.5:554/stream',
-        timeLimit: 60, // time in seconds for each segmented video file
-        folder: '/home/natthan/Desktop/myapp/VideoForPic',
-    })
-    // Starts Recording
-    rec.startRecording();
- 
-    setTimeout(() => {
-        console.log('Stopping Recording')
-        rec.stopRecording()
-        rec = null
-        res.render('home_user/cctv');
-    }, 30000)
-    res.redirect('/cctv');
-
-}
 
 
 exports.record_cctv2 = function(req, res, next) {
@@ -159,8 +139,6 @@ const Recorder = require('node-rtsp-recorder').Recorder
         url: 'rtsp://admin:kusrc12345@158.108.122.6:554/stream',
         timeLimit: 60, // time in seconds for each segmented video file
         folder: '/home/natthan/Desktop/myapp/VideoForPic',
-        name: false,
-        directoryPathFormat: false,
     })
     // Starts Recording
     rec.startRecording();
@@ -170,8 +148,8 @@ const Recorder = require('node-rtsp-recorder').Recorder
         rec.stopRecording()
         rec = null
         res.render('home_user/cctv');
-
     }, 30000)
+
     res.redirect('/cctv');
 
 
@@ -199,11 +177,7 @@ const Recorder = require('node-rtsp-recorder').Recorder
     }, 30000)
     res.redirect('/cctv');
 
-
-
-
 }
-
 
 
 

@@ -62,7 +62,7 @@ exports.signup = function(req, res, next) {
 
 exports.login = function(req, res, next) { 
 	passport.authenticate('local', {
-		successRedirect: "/",
+		successRedirect: "/cctv",
 		failureRedirect: "/login",
 		failureFlash: true
 	})(req, res, next);

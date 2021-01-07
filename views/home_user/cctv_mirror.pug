@@ -1,0 +1,38 @@
+block content
+  include ../common/head.pug
+  +head("CCTV")
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  meta(http-equiv="X-UA-Compatible",content="ie=edge")
+  div(align="center")
+    h1 CCTV
+    table.table
+      
+      tbody(align="center")
+        tr
+          td
+            canvas(id="chanel2",class="sub")
+            form(action="/record_cctv2", method="POST")
+                      button(type="submit").btn.btn-primary CCTV2
+            button(onclick='to_main("2")').btn.btn-warning SHOW 
+          td
+            canvas(id="chanel3",class="sub")
+            form(action="/record_cctv3", method="POST")
+                      button(type="submit").btn.btn-primary CCTV3
+            button(onclick='to_main("3")').btn.btn-warning SHOW 
+
+
+    script(type="text/javascript" src='/javascripts/jsmpeg.min.js')
+    script(type="text/javascript").
+  
+      var canvas2 = document.getElementById('chanel2');
+      var canvas3 = document.getElementById('chanel3');
+      var websocket2 = new WebSocket("ws://127.0.0.1:8888");
+      var websocket3 = new WebSocket("ws://127.0.0.1:8889");
+      var cam2= new jsmpeg(websocket2, {canvas:canvas2, autoplay:true, loop:true});
+      var cam3= new jsmpeg(websocket3, {canvas:canvas3, autoplay:true, loop:true});
+
+  
+    
+    
+
