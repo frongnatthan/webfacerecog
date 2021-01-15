@@ -106,13 +106,13 @@ exports.do_upload = function(req, res, file) {
 
     });
     response.on("end",function(){
-      console.log("api response is: "+ api_response);
+      console.log("api response is success ");
     });
   }
   var req = http.request(options, callback);
   req.end();
 
-  res.send("File upload and Train sucessfully.");
+  res.redirect('/cctv');
   }
 
 
@@ -121,7 +121,7 @@ exports.do_upload = function(req, res, file) {
 
 
 exports.show_cctv = function(req, res, next) {
-res.render('home_user/cctv');
+res.render('home_user/cctv', { title: 'Express', user: req.user });
 
 }
 
@@ -149,7 +149,6 @@ const Recorder = require('node-rtsp-recorder').Recorder
         rec = null
         res.render('home_user/cctv');
     }, 30000)
-
     res.redirect('/cctv');
 
 
@@ -185,33 +184,6 @@ const Recorder = require('node-rtsp-recorder').Recorder
 
 
 
-
-
-
-/////////open cv test////////
-const cv = require('opencv4nodejs');
-const path = require('path');
-const express = require('express');
-const app = express();
-const server =require('http').Server(app);
-const io= require('socket.io')(server);
-
-//'rtsp://admin:kusrc12345@158.108.122.5:554/stream'//
-const wCap = new cv.VideoCapture(0);
-///////////////
-
-
-exports.show_opencv = function(req, res, next) {
-  setInterval(() => {
-    const frame = wCap.read();
-    const image = cv.imencode('.jpg', frame).toString('base64');
-    io.emit('image',image);
-  },1000)
-//res.sendFile(path.join(__dirname,'home/opencv'));
-res.render('home_user/opencv');
- 
-
-}
 
 
 

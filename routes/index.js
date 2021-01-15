@@ -31,7 +31,6 @@ router.get('/cctv',landing.show_cctv);
 router.post('/record_cctv2',landing.record_cctv2);
 router.post('/record_cctv3',landing.record_cctv3);
 
-router.get('/opencv',landing.show_opencv);
 
 
 //multer object creation

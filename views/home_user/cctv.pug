@@ -6,25 +6,25 @@ html(lang='en')
     header
       include ../common/navbar.pug
       +navbar(user)
-      if !user
+      if user
         div(class="card" align="center")
           table.table(style="border:0px ")
             tbody(align="center")
               tr
                 td
-                  canvas(id="chanel2" width="200" height="200" style="border:1px solid")
+                  canvas(id="chanel2"  style="border:1px solid")
                   form(action="/record_cctv2", method="POST")
                     button(type="submit").btn.btn-primary RECORD CCTV2
                 td
-                  canvas(id="chanel3" width="200" height="200" style="border:1px solid")
+                  canvas(id="chanel3" style="border:1px solid")
                   form(action="/record_cctv3", method="POST")
                     button(type="submit").btn.btn-primary RECORD CCTV3
         
           form(method='POST',action='/upload', enctype='multipart/form-data')
+            label.small.mb-1.mt-3 Name :
+            input(type="text",name="name")
             input(type="file", name="imageupload" required)
             input(type='submit', name="uploadimage", value='Upload Video')
-
-        script(type="text/javascript" src='/javascripts/jsmpeg.min.js')
         script(type="text/javascript").
           var canvas2 = document.getElementById('chanel2');
           var canvas3 = document.getElementById('chanel3');

@@ -50,7 +50,7 @@ exports.signup = function(req, res, next) {
 				}
 				return newUser.save().then(result => {
 					passport.authenticate('local', {
-						successRedirect: "/",
+						successRedirect: "/login",
 						failureRedirect: "/signup",
 						failureFlash: true
 					})(req, res, next);
