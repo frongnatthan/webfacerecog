@@ -12,13 +12,22 @@ html(lang='en')
             tbody(align="center")
               tr
                 td
-                  canvas(id="chanel2"  style="border:1px solid")
+                  canvas(id="chanel1"  style="border:1px solid;width:720px")
+                  form(action="/record_cctv1", method="POST")
+                    button(type="submit").btn.btn-primary RECORD CCTV1
+                td
+                  canvas(id="chanel2"  style="border:1px solid;width:720px")
                   form(action="/record_cctv2", method="POST")
                     button(type="submit").btn.btn-primary RECORD CCTV2
+              tr
                 td
-                  canvas(id="chanel3" style="border:1px solid")
+                  canvas(id="chanel3" style="border:1px solid;width:720px")
                   form(action="/record_cctv3", method="POST")
                     button(type="submit").btn.btn-primary RECORD CCTV3
+                td
+                  canvas(id="chanel4"  style="border:1px solid;width:720px")
+                  form(action="/record_cctv4", method="POST")
+                    button(type="submit").btn.btn-primary RECORD CCTV4
         
           form(method='POST',action='/upload', enctype='multipart/form-data')
             label.small.mb-1.mt-3 Name :
@@ -26,11 +35,19 @@ html(lang='en')
             input(type="file", name="imageupload" required)
             input(type='submit', name="uploadimage", value='Upload Video')
         script(type="text/javascript").
+          
+          var canvas1 = document.getElementById('chanel1');
           var canvas2 = document.getElementById('chanel2');
           var canvas3 = document.getElementById('chanel3');
+          var canvas4 = document.getElementById('chanel4');
+          var websocket1 = new WebSocket("ws://127.0.0.1:8887");
+
           var websocket2 = new WebSocket("ws://127.0.0.1:8888");
           var websocket3 = new WebSocket("ws://127.0.0.1:8889");
+          var websocket4 = new WebSocket("ws://127.0.0.1:8890");
+          var cam1= new jsmpeg(websocket1, {canvas:canvas1, autoplay:true, loop:true});
           var cam2= new jsmpeg(websocket2, {canvas:canvas2, autoplay:true, loop:true});
           var cam3= new jsmpeg(websocket3, {canvas:canvas3, autoplay:true, loop:true});
+          var cam4= new jsmpeg(websocket4, {canvas:canvas4, autoplay:true, loop:true});
     include ../common/footer.pug
     +footer()
