@@ -28,11 +28,15 @@ html(lang='en')
                   canvas(id="chanel4"  style="border:1px solid;width:720px")
                   form(action="/record_cctv4", method="POST")
                     button(type="submit").btn.btn-primary RECORD CCTV4
-        
-          form(method='POST',action='/upload', enctype='multipart/form-data')
+
+          label.
+            *After record from CCTV.File have been save in Downloads folder in your computer. Please Upload That file To Train a model
+          |
+          form(method='POST',action='http://158.108.168.11:9998/upload', enctype='multipart/form-data')
+
             label.small.mb-1.mt-3 Name :
-            input(type="text",name="name")
-            input(type="file", name="imageupload" required)
+            input(type="text",name="name" required)
+            input(type="file", name="file" required)
             input(type='submit', name="uploadimage", value='Upload Video')
         script(type="text/javascript").
           

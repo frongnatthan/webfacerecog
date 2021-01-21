@@ -85,31 +85,22 @@ exports.get_layout = function(req, res, next) {
 
 
 
-//upload to webserver
-exports.show_upload = function(req, res, next) {
-res.render('home_user/upload'); 
 
-}
 
 exports.do_upload = function(req, res, file) {
   var api_response = 'sucessfully';
   var options ={
     host: '127.0.0.1',
-    port: 9999,
-    path: '/action',
-    method:'GET'
+    port: 9998,
+    path: '/upload',
+    method:'POST',
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
   }
 
-  callback = function(response){
-    response.on("data",function(chunk){
-      api_response+=chunk;
-
-    });
-    response.on("end",function(){
-      console.log("api response is success ");
-    });
-  }
-  var req = http.request(options, callback);
+  console.log(req.params.file)
+  var req = http.request(options);
   req.end();
 
   res.redirect('/cctv');
@@ -132,7 +123,7 @@ const Recorder = require('node-rtsp-recorder').Recorder
     var rec = new Recorder({
         url: 'rtsp://admin:kusrc12345@158.108.122.4:554/stream',
         timeLimit: 60, // time in seconds for each segmented video file
-        folder: '/home/natthan/Desktop/myapp/VideoForPic',
+        folder: '/home/natthan/Downloads',
     })
     // Starts Recording
     rec.startRecording();

@@ -35,24 +35,9 @@ router.post('/record_cctv4',landing.record_cctv4);
 
 
 
-//multer object creation
-var multer  = require('multer')
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-    	  	  console.log(file.originalname)
 
-        cb(null, 'VideoForPic')
-    },
-    filename: function (req, file, cb) {
-
-        cb(null, file.originalname)
-  }
-})
-
-var upload = multer({ storage: storage })
-router.get('/upload',landing.show_upload);
  
-router.post('/upload',upload.single('imageupload'),landing.do_upload);
+router.post('/do_upload',landing.do_upload);
 
 
 

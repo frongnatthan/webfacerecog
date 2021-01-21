@@ -8,8 +8,10 @@ import math
 from sklearn import neighbors
 import pickle
 from PIL import Image, ImageDraw
+
 from flask import Flask
-from flask_restful import Api,Resource
+from flask_restful import Api,Resource,reqparse
+import werkzeug, os
 
 
 faceCascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
