@@ -9,7 +9,7 @@ from sklearn import neighbors
 import pickle
 from PIL import Image, ImageDraw
 
-from flask import Flask
+from flask import Flask,send_from_directory
 from flask_restful import Api,Resource,reqparse
 import werkzeug, os
 
@@ -116,17 +116,11 @@ train_stat=False
 
 app=Flask(__name__)
 api=Api(app)
-UPLOAD_FOLDER = '/home/natthan/Desktop/myapp/VideoForPic'
+UPLOAD_FOLDER = '/gluster_data/users/aikusrcuser08/SERVER/VideoForPic'
+app.config["CLIENT_FILE"] = "/gluster_data/users/aikusrcuser08/SERVER"
 parser = reqparse.RequestParser()
 parser.add_argument('file',type=werkzeug.datastructures.FileStorage, location='files')
 parser.add_argument('name', type=str, location='form')
-class Action(Resource):
-    def get(self):
-        process_stat=process()
-        train_stat=train("PicForTrain", model_save_path="trained_knn_model.clf", n_neighbors=2)
-        if(process_stat and train_stat):
-            return 0
-
 class Upload(Resource):
     decorators=[]
     def post(self):
@@ -138,13 +132,9 @@ class Upload(Resource):
             photo.save(os.path.join(UPLOAD_FOLDER,filename))
             process_stat=process()
             train_stat=train("PicForTrain", model_save_path="trained_knn_model.clf", n_neighbors=2)
-            if(process_stat and train_stat):
-                return 0
-        
+            return send_from_directory(app.config["CLIENT_FILE"], filename="trained_knn_model.clf", as_attachment=True)
 
-api.add_resource(Action,"/action")
 api.add_resource(Upload,"/upload")
 
 if __name__ == "__main__":
-    app.run(port=9998,debug=True)
-    
+    app.run(host = '0.0.0.0',port=9997, threaded = True ,debug=False)
