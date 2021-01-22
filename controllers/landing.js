@@ -91,7 +91,7 @@ exports.do_upload = function(req, res, file) {
   var api_response = 'sucessfully';
   var options ={
     host: '127.0.0.1',
-    port: 9998,
+    port: 9997,
     path: '/upload',
     method:'POST',
     headers: {
@@ -124,6 +124,7 @@ const Recorder = require('node-rtsp-recorder').Recorder
         url: 'rtsp://admin:kusrc12345@158.108.122.4:554/stream',
         timeLimit: 60, // time in seconds for each segmented video file
         folder: '/home/natthan/Downloads',
+        name: "CCTV1"
     })
     // Starts Recording
     rec.startRecording();
@@ -151,7 +152,8 @@ const Recorder = require('node-rtsp-recorder').Recorder
     var rec = new Recorder({
         url: 'rtsp://admin:kusrc12345@158.108.122.5:554/stream',
         timeLimit: 60, // time in seconds for each segmented video file
-        folder: '/home/natthan/Desktop/myapp/VideoForPic',
+        folder: '/home/natthan/Downloads',
+        name: "CCTV2"
     })
     // Starts Recording
     rec.startRecording();
@@ -182,7 +184,8 @@ const Recorder = require('node-rtsp-recorder').Recorder
     var rec = new Recorder({
         url: 'rtsp://admin:kusrc12345@158.108.122.6:554/stream',
         timeLimit: 60, // time in seconds for each segmented video file
-        folder: '/home/natthan/Desktop/myapp/VideoForPic',
+        folder: '/home/natthan/Downloads',
+        name: "CCTV3"
     })
     // Starts Recording
     rec.startRecording();
@@ -208,7 +211,8 @@ const Recorder = require('node-rtsp-recorder').Recorder
     var rec = new Recorder({
         url: 'rtsp://admin:kusrc12345@158.108.122.7:554/stream',
         timeLimit: 60, // time in seconds for each segmented video file
-        folder: '/home/natthan/Desktop/myapp/VideoForPic',
+        folder: '/home/natthan/Downloads',
+        name: "CCTV4"
     })
     // Starts Recording
     rec.startRecording();
