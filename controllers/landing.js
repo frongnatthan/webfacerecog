@@ -112,9 +112,33 @@ exports.do_upload = function(req, res, file) {
 
 
 exports.show_cctv = function(req, res, next) {
-res.render('home_user/cctv', { title: 'Express', user: req.user });
+  var request = require('request');
+ request.get('http://127.0.0.1:9997/get_person', 
+function(error, response, body){
+    var data = JSON.parse(body);
+res.render('home_user/cctv', {user: req.user,result:data});
+   });
 
 }
+
+
+
+exports.delete_name = function(req, res, next) {
+ var name = req.params.name;
+var request = require('request');
+ request.post('http://127.0.0.1:9997/delete/'+name,function(error, response, body){
+ return response
+   });
+
+}
+
+
+
+
+
+
+
+
 
 exports.record_cctv1 = function(req, res, next) {
 

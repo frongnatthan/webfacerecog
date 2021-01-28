@@ -28,6 +28,8 @@ router.post('/lead/:lead_id/delete', landing.delete_lead);
 router.get('/',landing.get_home);
 router.post('/',landing.submit_lead);
 router.get('/cctv',landing.show_cctv);
+router.post('/delete/:name', landing.delete_name);
+
 router.post('/record_cctv1',landing.record_cctv1);
 router.post('/record_cctv2',landing.record_cctv2);
 router.post('/record_cctv3',landing.record_cctv3);
