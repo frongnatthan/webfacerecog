@@ -40,7 +40,8 @@ html(lang='en')
             form(action="http://127.0.0.1:9997/download_model", method="POST")
               button(type="submit").btn.btn-primary Download model
           h2 List of people in the model
-          div(class="card" align="center")
+        div(class="card" align="center")
+          if result
             table.table.tablesorter.table-bordered
               thead(align="center")
                 tr
@@ -56,6 +57,8 @@ html(lang='en')
                     td 
                       form(action="/delete/"+name, method="POST")
                         button(type="submit").btn.btn-warning Delete
+          if !result 
+            h1 API CANNOT CONNECT
                   
         script(type="text/javascript").
           

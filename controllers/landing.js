@@ -115,7 +115,14 @@ exports.show_cctv = function(req, res, next) {
   var request = require('request');
  request.get('http://127.0.0.1:9997/get_person', 
 function(error, response, body){
-    var data = JSON.parse(body);
+    if(!error){
+      var data = JSON.parse(body);
+    }
+    else{
+      var data = []
+
+    }
+
 res.render('home_user/cctv', {user: req.user,result:data});
    });
 
